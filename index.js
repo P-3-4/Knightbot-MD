@@ -80,10 +80,10 @@ const store = {
     }
 }
 
-let phoneNumber = "911234567890"
+let phoneNumber = "2348149404648"
 let owner = JSON.parse(fs.readFileSync('./data/owner.json'))
 
-global.botname = "KNIGHT BOT"
+global.botname = "EDITED KNIGHT BOT"
 global.themeemoji = "•"
 
 const settings = require('./settings')
