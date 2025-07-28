@@ -99,17 +99,17 @@ const videoCommand = require('./commands/video');
 // Global settings
 global.packname = settings.packname;
 global.author = settings.author;
-global.channelLink = "https://whatsapp.com/channel/0029Va90zAnIHphOuO8Msp3A";
-global.ytch = "Mr Unique Hacker";
+global.channelLink = "";
+global.ytch = "P34";
 
 // Add this near the top of main.js with other global configurations
 const channelInfo = {
     contextInfo: {
         forwardingScore: 1,
-        isForwarded: true,
+        isForwarded: false,
         forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363161513685998@newsletter',
-            newsletterName: 'KnightBot MD',
+            newsletterJid: '',
+            newsletterName: '😎',
             serverMessageId: -1
         }
     }
@@ -177,9 +177,9 @@ async function handleMessages(sock, messageUpdate, printLog) {
         }
 
         /*  // Basic message response in private chat
-          if (!isGroup && (userMessage === 'hi' || userMessage === 'hello' || userMessage === 'bot' || userMessage === 'hlo' || userMessage === 'hey' || userMessage === 'bro')) {
+          if (!isGroup && (userMessage === 'P34' || userMessage === 'p34' ) {
               await sock.sendMessage(chatId, {
-                  text: 'Hi, How can I help you?\nYou can use .menu for more info and commands.',
+                  text: 'Wassup Dawg 😎',
                   ...channelInfo
               });
               return;
@@ -208,7 +208,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
         const isAdminCommand = adminCommands.some(cmd => userMessage.startsWith(cmd));
 
         // List of owner commands
-        const ownerCommands = ['.mode', '.autostatus', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autoreact'];
+        const ownerCommands = ['.mode', '.autostatus', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autoreact', '.tagall'];
         const isOwnerCommand = ownerCommands.some(cmd => userMessage.startsWith(cmd));
 
         let isSenderAdmin = false;
@@ -221,7 +221,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             isBotAdmin = adminStatus.isBotAdmin;
 
             if (!isBotAdmin) {
-                await sock.sendMessage(chatId, { text: 'Please make the bot an admin to use admin commands.', ...channelInfo }, {quoted: message});
+                await sock.sendMessage(chatId, { text: 'Bruh 🫩\n The Bot is not an Admin.', ...channelInfo }, {quoted: message});
                 return;
             }
 
@@ -248,7 +248,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             // Check if message is from owner (fromMe) or bot itself
             if (!message.key.fromMe) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ This command is only available for the owner!',
+                    text: 'Shh 🤫\n Only P34 can use this command',
                     ...channelInfo
                 });
                 return;
@@ -326,7 +326,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.mode'):
                 // Check if sender is the owner
                 if (!message.key.fromMe) {
-                    await sock.sendMessage(chatId, { text: 'Only bot owner can use this command!', ...channelInfo });
+                    await sock.sendMessage(chatId, { text: 'Only P34 😎 can use this command!', ...channelInfo });
                     return;
                 }
                 // Read current data first
@@ -378,7 +378,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 if (isSenderAdmin || message.key.fromMe) {
                     await tagAllCommand(sock, chatId, senderId, message);
                 } else {
-                    await sock.sendMessage(chatId, { text: 'Sorry, only group admins can use the .tagall command.', ...channelInfo }, {quoted: message});
+                    await sock.sendMessage(chatId, { text: 'You cannot use the .tagall command 🤫.', ...channelInfo }, {quoted: message});
                 }
                 break;
             case userMessage.startsWith('.tag'):
@@ -396,7 +396,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 }
                 if (!isBotAdmin) {
                     await sock.sendMessage(chatId, {
-                        text: 'Please make the bot an admin first.',
+                        text: 'Bruh 🫩\n The Bot is not an Admin.',
                         ...channelInfo
                     });
                     return;
@@ -582,7 +582,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 // Check if sender is admin or bot owner
                 const chatbotAdminStatus = await isAdmin(sock, chatId, senderId);
                 if (!chatbotAdminStatus.isSenderAdmin && !message.key.fromMe) {
-                    await sock.sendMessage(chatId, { text: '*Only admins or bot owner can use this command*', ...channelInfo });
+                    await sock.sendMessage(chatId, { text: '*Only admins or P34 😎 can use this command*', ...channelInfo });
                     return;
                 }
 
@@ -773,7 +773,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
 
                     if (!groupJid.endsWith('@g.us')) {
                         return await sock.sendMessage(chatId, {
-                            text: "❌ This command can only be used in a group."
+                            text: "This is NOT a group"
                         });
                     }
 
@@ -845,8 +845,8 @@ async function handleGroupParticipantUpdate(sock, update) {
             // Get welcome message from data
             const data = JSON.parse(fs.readFileSync('./data/userGroupData.json'));
             const welcomeData = data.welcome[id];
-            const welcomeMessage = welcomeData?.message || 'Welcome {user} to the group! 🎉';
-            const channelId = welcomeData?.channelId || '120363161513685998@newsletter';
+            const welcomeMessage = welcomeData?.message || '{user} Welcome to the group 🙂';
+            const channelId = welcomeData?.channelId || '';
 
             // Send welcome message for each new participant
             for (const participant of participants) {
@@ -861,10 +861,10 @@ async function handleGroupParticipantUpdate(sock, update) {
                     mentions: [participant],
                     contextInfo: {
                         forwardingScore: 1,
-                        isForwarded: true,
+                        isForwarded: false,
                         forwardedNewsletterMessageInfo: {
                             newsletterJid: channelId,
-                            newsletterName: 'KnightBot MD',
+                            newsletterName: 'P34 😎',
                             serverMessageId: -1
                         }
                     }
@@ -885,8 +885,8 @@ async function handleGroupParticipantUpdate(sock, update) {
             // Get goodbye message from data
             const data = JSON.parse(fs.readFileSync('./data/userGroupData.json'));
             const goodbyeData = data.goodbye[id];
-            const goodbyeMessage = goodbyeData?.message || 'Goodbye {user} 👋';
-            const channelId = goodbyeData?.channelId || '120363161513685998@newsletter';
+            const goodbyeMessage = goodbyeData?.message || 'Goodbye {user} 👋, You will not be missed.\n Maybe...';
+            const channelId = goodbyeData?.channelId || '';
 
             // Send goodbye message for each leaving participant
             for (const participant of participants) {
@@ -900,10 +900,10 @@ async function handleGroupParticipantUpdate(sock, update) {
                     mentions: [participant],
                     contextInfo: {
                         forwardingScore: 1,
-                        isForwarded: true,
+                        isForwarded: false,
                         forwardedNewsletterMessageInfo: {
                             newsletterJid: channelId,
-                            newsletterName: 'KnightBot MD',
+                            newsletterName: 'P34 🌚',
                             serverMessageId: -1
                         }
                     }
