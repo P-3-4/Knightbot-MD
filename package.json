@@ -1,6 +1,6 @@
 {
-  "name": "knightbot",
-  "version": "1.0.0",
+  "name": "edited knightbot",
+  "version": "2.0.8",
   "description": "WhatsApp Bot",
   "main": "index.js",
   "scripts": {
